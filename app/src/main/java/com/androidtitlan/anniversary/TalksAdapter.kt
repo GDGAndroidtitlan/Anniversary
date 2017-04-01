@@ -3,6 +3,7 @@ package com.androidtitlan.anniversary
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.item_talk.view.*
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -36,14 +37,21 @@ class TalksAdapter(val talks: MutableList<Talk>) : RecyclerView.Adapter<TalksAda
     }
 
     override fun onBindViewHolder(holder: TalkViewHolder?, position: Int) {
-        val talk  = talks[position]
+        val talk = talks[position]
         holder?.bindTalk(talk)
     }
 
-    class TalkViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView){
+    class TalkViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindTalk(talk: Any){
-
+        fun bindTalk(talk: Talk) {
+            itemView?.let {
+                with(itemView) {
+                    labelDate?.text = talk.date
+                    labelTitle?.text = talk.title
+                    labelName?.text = talk.speaker.name
+                    labelJob?.text = talk.speaker.job
+                }
+            }
         }
     }
 }
