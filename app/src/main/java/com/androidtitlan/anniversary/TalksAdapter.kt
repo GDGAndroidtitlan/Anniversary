@@ -1,13 +1,8 @@
 package com.androidtitlan.anniversary
 
-import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
-import android.view.LayoutInflater
+import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import kotlinx.android.synthetic.main.fragment_talks.*
 
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -27,23 +22,28 @@ import kotlinx.android.synthetic.main.fragment_talks.*
  * specific language governing permissions and limitations
  * under the License.
  *
- * Created by Pedro Hernández on 03/2017.
+ * Created by Pedro Hernández on 04/2017.
  */
-class FragmentTalks : Fragment(){
+class TalksAdapter(val talks: MutableList<Any>) : RecyclerView.Adapter<TalksAdapter.TalkViewHolder>() {
 
-    val adapter by lazy {
-        TalksAdapter(mutableListOf<Any>())
+    override fun getItemCount(): Int {
+        return talks.size
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view : View? = container?.inflate(R.layout.fragment_talks)
-        return view
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TalkViewHolder? {
+        val itemView = parent?.inflate(R.layout.item_talk)
+        return TalkViewHolder(itemView)
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        listTalks.layoutManager = LinearLayoutManager(context)
-        listTalks.setHasFixedSize(true)
-        listTalks.adapter = adapter
+    override fun onBindViewHolder(holder: TalkViewHolder?, position: Int) {
+        val talk  = talks[position]
+        holder?.bindTalk(talk)
+    }
+
+    class TalkViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView){
+
+        fun bindTalk(talk: Any){
+
+        }
     }
 }
