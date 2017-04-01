@@ -1,9 +1,5 @@
 package com.androidtitlan.anniversary
 
-import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.view.ViewGroup
-
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -24,26 +20,7 @@ import android.view.ViewGroup
  *
  * Created by Pedro Hernández on 04/2017.
  */
-class TalksAdapter(val talks: MutableList<Talk>) : RecyclerView.Adapter<TalksAdapter.TalkViewHolder>() {
 
-    override fun getItemCount(): Int {
-        return talks.size
-    }
+data class Talk(val date: String, val title: String, val speaker: Speaker)
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TalkViewHolder? {
-        val itemView = parent?.inflate(R.layout.item_talk)
-        return TalkViewHolder(itemView)
-    }
-
-    override fun onBindViewHolder(holder: TalkViewHolder?, position: Int) {
-        val talk  = talks[position]
-        holder?.bindTalk(talk)
-    }
-
-    class TalkViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView){
-
-        fun bindTalk(talk: Any){
-
-        }
-    }
-}
+data class Speaker(val name: String, val job: String)

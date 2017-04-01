@@ -32,7 +32,11 @@ import kotlinx.android.synthetic.main.fragment_talks.*
 class FragmentTalks : Fragment(){
 
     val adapter by lazy {
-        TalksAdapter(mutableListOf<Any>())
+        val talks = TalksDataSource.getTalks()
+        val immutableList = mutableListOf<Talk>()
+        immutableList.addAll(talks)
+
+        TalksAdapter(immutableList)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
